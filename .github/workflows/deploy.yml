@@ -2,14 +2,15 @@ name: Deploy Frontend
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Login to DockerHub
@@ -18,21 +19,21 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push image
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: info-ottok-frontend:latest
+          tags: olltumuct/info-ottok-frontend:latest
 
-      - name: SSH and redeploy
+      - name: SSH and restart containers
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /home/frontend
+            cd /root/info-ottok-frontend
             docker-compose down
             docker-compose pull
-            docker-compose up -d
+            docker-compose up -d --remove-orphans
