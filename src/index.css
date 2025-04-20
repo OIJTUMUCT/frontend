@@ -1,0 +1,22 @@
+@import 'leaflet/dist/leaflet.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.leaflet-control-attribution {
+    display: none !important;
+  }
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  
+.animate-fade {
+  animation: fade-in 0.5s ease-in-out;
+}  
