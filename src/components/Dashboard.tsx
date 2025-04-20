@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { ChurnBarChart } from './ChurnBarChart';
 import { ChartBarIcon } from '@heroicons/react/24/solid';
 import { DeckMap } from './Map';
-import CohortHeatmap from './CohortHeatmap';
+import CohortHeatmap from './CohortHeatMap';
 import { fetchSegments, fetchTimeline } from '../services/api';
 import { ChurnTimelineChart } from './ChurnTimelineChart';
 import { SegmentTimelineChart } from './SegmentTimelineChart';
